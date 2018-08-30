@@ -77,7 +77,8 @@ def on_message(client, userdata, message):
 Connected = False   #global variable for the state of the connection
 
 #MQTT information
-topic = str(raw_input("Please enter mqtt topic: ")) 
+count = int(raw_input("Please enter the amount of cabinets you want to subscribe: "))
+#topic = str(raw_input("Please enter tu id: ")) 
 broker_address= str(raw_input("Please enter host mqtt: "))   #Broker address
 port = raw_input("Please enter port mqtt: ")                        #Broker port
 user = str(raw_input("Please enter mqtt username: "))
@@ -101,7 +102,13 @@ client.loop_start()        #start the loop
 while Connected != True:    #Wait for connection
     time.sleep(0.1)
  
-client.subscribe(topic)
+for x in range (0,count):
+	topic = str(raw_input("Please enter cabinet id you want to subscribe: "))
+	client.subscribe('heineken/tu'+topic)
+
+	
+
+#client.subscribe('heineken/tu'+topic)
  
 try:
     while True:
