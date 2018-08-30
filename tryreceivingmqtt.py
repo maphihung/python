@@ -56,11 +56,11 @@ def on_message(client, userdata, message):
 	cursor.execute(sqlCompare)
 	resultToCompare = cursor.fetchone()
 	if (resultToCompare != None):
-		lastmin = resultToCompare['minReceive']
-		lastmax = resultToCompare['maxReceive']
+		#lastmin = resultToCompare['minReceive']
+		#lastmax = resultToCompare['maxReceive']
 		lastTemp1 = resultToCompare['Temp1']
 		lastTemp2 = resultToCompare['Temp2']
-		if(lastmin == minReceive ) and (lastMax == maxReceive) and (lastTemp1 == Temp1) and (lastTemp2 == Temp2):
+		if (lastTemp1 == Temp1) and (lastTemp2 == Temp2): #(lastmin == minReceive ) and (lastmax == maxReceive)
 			print ('No insert to database')
 		else:
 			sqlNextResult = "INSERT INTO Record_Table(id,dateReceive,timeReceive,minReceive,maxReceive,Temp1,Temp2,Status1,Status2) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
@@ -105,7 +105,7 @@ while Connected != True:    #Wait for connection
 for x in range (0,count):
 	topic = str(raw_input("Please enter cabinet id you want to subscribe: "))
 	client.subscribe('heineken/tu'+topic)
-
+	time.sleep(0.5)
 	
 
 #client.subscribe('heineken/tu'+topic)
